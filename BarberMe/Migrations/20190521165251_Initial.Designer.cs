@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BarberMe.Migrations
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20190520191236_Initial")]
+    [Migration("20190521165251_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

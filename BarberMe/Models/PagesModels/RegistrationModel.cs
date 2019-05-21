@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -32,5 +33,6 @@ namespace BarberMe.Models.PagesModels
         public string Facebook { get; set; }
         public string Geoposition { get; set; }
         public string PhotoLink { get; set; }
+        public IFormFile barbershopImage { get; set; }
     }
 }

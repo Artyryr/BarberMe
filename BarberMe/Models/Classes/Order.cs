@@ -10,7 +10,7 @@ namespace BarberMe.Models
     {
         [Key]
         public int OrderId { get; set; }
-        public Service ServiceId { get; set; }
+        public Service Service { get; set; }
         public Schedule Schedule { get; set; }
         public Payment Payment { get; set; }
         public double Price { get; set; }

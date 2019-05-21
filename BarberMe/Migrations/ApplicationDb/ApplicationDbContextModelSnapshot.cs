@@ -107,7 +107,7 @@ namespace BarberMe.Migrations.ApplicationDb
 
                     b.Property<int?>("ScheduleId");
 
-                    b.Property<int?>("ServiceId1");
+                    b.Property<int?>("ServiceId");
 
                     b.Property<string>("Telephone");
 
@@ -117,7 +117,7 @@ namespace BarberMe.Migrations.ApplicationDb
 
                     b.HasIndex("ScheduleId");
 
-                    b.HasIndex("ServiceId1");
+                    b.HasIndex("ServiceId");
 
                     b.ToTable("Orders");
                 });
@@ -252,9 +252,9 @@ namespace BarberMe.Migrations.ApplicationDb
                         .WithMany()
                         .HasForeignKey("ScheduleId");
 
-                    b.HasOne("BarberMe.Models.Service", "ServiceId")
+                    b.HasOne("BarberMe.Models.Service", "Service")
                         .WithMany()
-                        .HasForeignKey("ServiceId1");
+                        .HasForeignKey("ServiceId");
                 });
 
             modelBuilder.Entity("BarberMe.Models.Review", b =>

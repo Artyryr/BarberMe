@@ -161,7 +161,7 @@ namespace BarberMe.Migrations.ApplicationDb
                 {
                     OrderId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ServiceId1 = table.Column<int>(nullable: true),
+                    ServiceId = table.Column<int>(nullable: true),
                     ScheduleId = table.Column<int>(nullable: true),
                     PaymentId = table.Column<int>(nullable: true),
                     Price = table.Column<double>(nullable: false),
@@ -186,8 +186,8 @@ namespace BarberMe.Migrations.ApplicationDb
                         principalColumn: "ScheduleId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Orders_Services_ServiceId1",
-                        column: x => x.ServiceId1,
+                        name: "FK_Orders_Services_ServiceId",
+                        column: x => x.ServiceId,
                         principalTable: "Services",
                         principalColumn: "ServiceId",
                         onDelete: ReferentialAction.Restrict);
@@ -209,9 +209,9 @@ namespace BarberMe.Migrations.ApplicationDb
                 column: "ScheduleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_ServiceId1",
+                name: "IX_Orders_ServiceId",
                 table: "Orders",
-                column: "ServiceId1");
+                column: "ServiceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_BarberId",

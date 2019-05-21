@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BarberMe.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190520191245_Initial")]
+    [Migration("20190521165301_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -109,7 +109,7 @@ namespace BarberMe.Migrations.ApplicationDb
 
                     b.Property<int?>("ScheduleId");
 
-                    b.Property<int?>("ServiceId1");
+                    b.Property<int?>("ServiceId");
 
                     b.Property<string>("Telephone");
 
@@ -119,7 +119,7 @@ namespace BarberMe.Migrations.ApplicationDb
 
                     b.HasIndex("ScheduleId");
 
-                    b.HasIndex("ServiceId1");
+                    b.HasIndex("ServiceId");
 
                     b.ToTable("Orders");
                 });
@@ -254,9 +254,9 @@ namespace BarberMe.Migrations.ApplicationDb
                         .WithMany()
                         .HasForeignKey("ScheduleId");
 
-                    b.HasOne("BarberMe.Models.Service", "ServiceId")
+                    b.HasOne("BarberMe.Models.Service", "Service")
                         .WithMany()
-                        .HasForeignKey("ServiceId1");
+                        .HasForeignKey("ServiceId");
                 });
 
             modelBuilder.Entity("BarberMe.Models.Review", b =>

@@ -30,5 +30,38 @@ namespace BarberMe.Models
         public string PhotoLink { get; set; }
         public List<Barber> Barbers { get; set; }
         public List<Service> Services{ get; set; }
+
+        public Barbershop()
+        {
+
+        }
+        public Barbershop(string barbershopUser, string email, string name, string address, 
+            string telephone, string descripiton, string instagram, string facebook, string geoposition, string photo)
+        {
+            BarbershopUserId = barbershopUser;
+            Email = email;
+            Name = name;
+            Address = address;
+            Telephone = telephone;
+            Description = descripiton;
+            Instagram = instagram;
+            Facebook = facebook;
+            Geoposition = geoposition;
+            PhotoLink = photo;
+        }
+
+        public Barbershop(string barbershopUser, string email, string name, string address,
+            string telephone, string descripiton, string instagram, string facebook, string geoposition)
+        {
+            BarbershopUserId = barbershopUser;
+            Email = email;
+            Name = name;
+            Address = address;
+            Telephone = telephone;
+            Description = descripiton;
+            Instagram = instagram;
+            Facebook = facebook;
+            Geoposition = geoposition;
+        }
     }
 }

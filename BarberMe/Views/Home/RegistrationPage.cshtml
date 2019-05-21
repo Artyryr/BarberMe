@@ -9,7 +9,7 @@
 
 <div class="row d-flex">
     <div class="col-md-12 ftco-animate makereservation p-5 bg-light fadeInUp ftco-animated">
-        <form action="" method="post">
+        <form asp-action="RegistrationPage" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -83,8 +83,15 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label>Загрузка изображения</label>
-
+                        <div>
+                            <label>Загрузка изображения</label>
+                        </div>
+                        <div class="btn btn-primary py-3 px-5 text-center" onclick="addImage()">
+                            Выбрать Изображение
+                        </div>
+                        <div>
+                            <input asp-for="barbershopImage" id="addImage" type="file" accept="image/*" name="barbershopImage" value="Выбрать изображение" class="invisible" /><br />
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-12 text-danger" asp-validation-summary="All"></div>
@@ -103,3 +110,12 @@
         </form>
     </div>
 </div>
+
+
+<environment class="Development">
+    <script>
+        function addImage() {
+            document.getElementById("addImage").click();
+        }
+    </script>
+</environment>

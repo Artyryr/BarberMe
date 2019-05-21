@@ -15,5 +15,14 @@ namespace BarberMe.Models.Database
         IQueryable<Schedule> Schedules { get; }
         IQueryable<Service> Service { get; }
         IQueryable<ServiceType> ServiceTypes { get; }
+
+        void AddBarber(Barber barber);
+        void AddBarbershop(Barbershop barbershop);
+        void AddOrder(Order order);
+        void AddPayment(Payment payment);
+        void AddReview(Review review);
+        void AddSchedule(Schedule schedule);
+        void AddService(Service service);
+        void AddServiceType(ServiceType type);
     }
 }
