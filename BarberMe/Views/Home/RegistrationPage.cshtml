@@ -1,0 +1,105 @@
+﻿@model RegistrationModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_layout";
+    ViewBag.Image = "url('/images/registration.jpeg')";
+    ViewBag.Title = "Регистрация Барбершопа";
+    ViewBag.PageName = "Регистрация Барбершопа";
+}
+
+<div class="row d-flex">
+    <div class="col-md-12 ftco-animate makereservation p-5 bg-light fadeInUp ftco-animated">
+        <form action="" method="post">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Email">E-mail</label>
+                        <input asp-for="Email" type="email" class="form-control" placeholder="E-mail" data-val="true" data-val-required="The E-mail is required.">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input asp-for="Password" type="password" class="form-control" placeholder="Пароль" name="Password" data-val="true" data-val-required="The Password is required.">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Повторите пароль</label>
+                        <input asp-for="ConfirmationPassword" type="password" class="form-control" placeholder="Повторите пароль" data-val="true" data-val-required="The Confirmed Password Name is recuired.">
+                        <span asp-validation-for="ConfirmationPassword" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Name">Название Барбершопа</label>
+                        <input asp-for="Name" type="text" class="form-control" placeholder="Название Барбершопа" data-val="true" data-val-required="The Name is required.">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Address">Адрес</label>
+                        <input asp-for="Address" type="text" class="form-control" placeholder="Адрес" data-val="true" data-val-required="The Address is required.">
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Телефон</label>
+                        <input asp-for="Telephone" type="text" class="form-control" placeholder="Номер телефона" data-val="true" data-val-required="The Telephone is required.">
+                        <span asp-validation-for="Telephone" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Детальная информация</label>
+                        <textarea asp-for="Description" rows="5" class="form-control" placeholder="Детальная информация" data-val="true" data-val-required="The Description is required."></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Instagram</label>
+                        <input asp-for="Instagram" type="text" class="form-control" placeholder="Ссылка на Instagram " data-val="true" data-val-required="The Description is required.">
+                        <span asp-validation-for="Instagram" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Facebook</label>
+                        <input asp-for="Facebook" type="text" class="form-control" placeholder="Ссылка на Facebook" data-val="true" data-val-required="The Description is required." />
+                        <span asp-validation-for="Facebook" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Геопозиция</label>
+                        <input asp-for="Geoposition" type="text" class="form-control" placeholder="Геопозиция в Google Maps" data-val="true" data-val-required="The Description is required." />
+                        <span asp-validation-for="Geoposition" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Загрузка изображения</label>
+
+                    </div>
+                </div>
+                <div class="col-md-12 text-danger" asp-validation-summary="All"></div>
+                <div class="col-md-12 mt-3 text-center">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary py-3 px-5 text-center">Зарегистрировать</button>
+                        <button type="reset" class="btn btn-primary py-3 px-5 text-center">Сбросить</button>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3 text-center">
+                    <div class="form-group">
+                        <a asp-action="LoginPage" class="py-3 px-5 text-center">Уже зарегистрированы?</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

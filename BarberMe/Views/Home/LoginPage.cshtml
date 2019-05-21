@@ -1,0 +1,46 @@
+﻿@model LoginModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+    ViewBag.Image = "url('/images/registration.jpeg')";
+    ViewBag.Title = "Barbershop Login";
+    ViewBag.PageName = "Barbershop Login";
+}
+<meta name="google-signin-client_id" content="555073913037-198rf5nhims0b5hbfdddifp2vcv6a9n2.apps.googleusercontent.com">
+
+<div class="row d-flex">
+    <div class="col-md-12 ftco-animate makereservation p-5 bg-light fadeInUp ftco-animated">
+        <form asp-action="LoginPage" asp-controller="Home" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="ReturnUrl" />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Email">E-mail</label>
+                        <input asp-for="Email" type="text" class="form-control" placeholder="E-mail" data-val="true" data-val-required="The E-mail is required.">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Password">Пароль</label>
+                        <input asp-for="Password" type="password" class="form-control" placeholder="Пароль" data-val="true" data-val-required="The E-mail is required.">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="text-danger" asp-validation-summary="All"></div>
+                <div class="col-md-12 mt-3 text-center">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary py-3 px-5 text-center" id="submit">Войти</button>
+
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3 text-center">
+                    <div class="form-group">
+                        <a class="py-3 px-5 text-center" asp-action="RegistrationPage">Еще не зарегистрированы?</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
