@@ -59,7 +59,7 @@ namespace Project.ver1
                                 template: "{controller=Home}/{action=Index}");
             });
 
-            //IdentitySeedData.EnsurePopulated(app);
+            SeedData.EnsurePopulated(app);
         }
     }
 }

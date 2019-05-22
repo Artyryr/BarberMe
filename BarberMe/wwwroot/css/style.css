@@ -5,6 +5,10 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
+.bg-grey {
+    background-color: #6c757d;
+}
+
 input[type=search] {
     background: #555 url(http://hp-proliant.co.uk/qual_images/mob-search-icon.png) no-repeat 9px center;
     border: solid 1px #ccc;

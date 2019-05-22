@@ -42,8 +42,8 @@
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                                    aria-expanded="false">Profile</a>
                                 <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                    <a asp-action="ProfilePage" asp-controller="Home" class="dropdown-item">Account</a>
-                                    <a asp-action="UpdateProfile" asp-controller="Home" class="dropdown-item">Update Profile</a>
+                                    <a asp-action="BarbershopIndex" asp-controller="Home" class="dropdown-item">Управление</a>
+                                    @*<a asp-action="UpdateProfile" asp-controller="Home" class="dropdown-item"></a>*@
                                     <a asp-action="Logout" asp-controller="Home" class="dropdown-item">Logout</a>
                                 </div>
                             </li>
@@ -70,8 +70,8 @@
             </div>
         </div>
     </section>
-    <div class="bg-light">
-        <div class="container body-content bg-light">
+    <div class="@ViewBag.Color">
+        <div class="@ViewBag.Container body-content">
             @RenderBody()
         </div>
     </div>
