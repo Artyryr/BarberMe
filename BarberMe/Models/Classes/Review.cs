@@ -10,6 +10,7 @@ namespace BarberMe.Models
     {
         [Key]
         public int ReviewId { get; set; }
+
         [Required]
         public int BarberId { get; set; }
 
@@ -24,5 +25,8 @@ namespace BarberMe.Models
 
         [Required]
         public string Description { get; set; }
+
+        [Required]
+        public DateTime Date { get; set; }
     }
 }

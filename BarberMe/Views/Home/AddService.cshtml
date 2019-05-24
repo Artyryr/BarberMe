@@ -1,0 +1,62 @@
+﻿@model AddServiceModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_layout";
+    ViewBag.Image = "url('/images/Registration.png')";
+    ViewBag.Title = "Добавление Услуги";
+    ViewBag.PageName = "Добавление Услуги";
+    ViewBag.Color = "bg-light";
+    ViewBag.Container = "container";
+}
+
+<div class="row d-flex">
+    <div class="col-md-12 ftco-animate makereservation p-5 bg-light fadeInUp ftco-animated">
+        <form asp-action="AddService" method="post" enctype="multipart/form-data">
+            <div class="row text-center">
+                <input asp-for="@Model.ServiceTypes" type="hidden">
+                <input asp-for="@Model.Service.BarbershopId" type ="hidden"/>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.Service.ServiceName">Название</label>
+                        <input asp-for="@Model.Service.ServiceName" type="text" class="form-control" required placeholder="Название" data-val="true" data-val-required="Введите название."/>
+                        <span asp-validation-for="@Model.Service.ServiceName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <label class="text-dark font-weight-bold">Тип услуги</label><br/>
+                    <select asp-for="@Model.Service.ServiceTypeId" asp-items="@Model.ServiceTypes" required class="form-control" type="range" data-val="true" required data-val-required="Выберите тип услуги.">
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.Service.ServiceDuration">Длительность</label>
+                        <input asp-for="@Model.Service.ServiceDuration" type="number" min="30" max="180" step="30" required class="form-control" placeholder="Длительность" data-val="true" data-val-required="Введите Длительность."/>
+                        <span asp-validation-for="@Model.Service.ServiceDuration" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.Service.ServicePrice">Цена</label>
+                        <input asp-for="@Model.Service.ServicePrice" type="number" min="1" class="form-control" required placeholder="Цена" data-val="true" data-val-required="Введите Цену."/>
+                        <span asp-validation-for="@Model.Service.ServicePrice" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="@Model.Service.ServiceDescription">Детальная информация</label>
+                        <textarea asp-for="@Model.Service.ServiceDescription" rows="5" class="form-control" placeholder="Детальная информация" data-val="true" data-val-required="Введите Описание"></textarea>
+                        <span asp-validation-for="@Model.Service.ServiceDescription" class="text-danger"></span>
+                    </div>
+            </div>
+                <div class="col-md-12 text-danger" asp-validation-summary="All"></div>
+                <div class="col-md-12 mt-3 text-center">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary py-3 px-5 text-center">Зарегистрировать</button>
+                        <button type="reset" class="btn btn-primary py-3 px-5 text-center">Сбросить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

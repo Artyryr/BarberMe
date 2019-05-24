@@ -26,10 +26,6 @@ namespace BarberMe.Models
         [Required]
         public string ServiceName { get; set; }
 
-        ///<value>
-        /// Description of a specific service
-        ///</value>
-        [Required]
         public string ServiceDescription { get; set; }
 
         ///<value>

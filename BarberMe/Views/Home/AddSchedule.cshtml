@@ -1,0 +1,56 @@
+﻿@model ScheduleModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_layout";
+    ViewBag.Image = "url('/images/Registration.png')";
+    ViewBag.Title = "Новвый Рабочий День";
+    ViewBag.PageName = "Новвый Рабочий День";
+    ViewBag.Color = "bg-light";
+    ViewBag.Container = "container";
+}
+
+<div class="row d-flex">
+    <div class="col-md-12 ftco-animate makereservation p-5 bg-light fadeInUp ftco-animated">
+        <form asp-action="AddSchedule" method="post" enctype="multipart/form-data">
+            <div class="row text-center">
+                <input asp-for="@Model.BarbershopId" type="hidden" />
+                <div class="col-md-6 text-center">
+                    <label class="text-dark font-weight-bold">Барбер</label><br />
+                    <select asp-for="@Model.Schedule.BarberId" asp-items="@Model.Names" class="form-control" type="range" required data-val="true" data-val-required="Выберите Барбера.">
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.Schedule.Date">Дата</label><br />
+                        <input asp-for="@Model.Schedule.Date" type="date" asp-format="{0:DD-MM-yyyy}" class="form-control" required data-val="true" data-val-required="Выберите Дату."/>
+                        <span asp-validation-for="@Model.Schedule.Date" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.From">Начало работы</label><br />
+                        @Html.EditorFor(m => m.From,
+    new { htmlAttributes = new { @class = "form-control", @step = 30 } })
+                        <span asp-validation-for="@Model.From" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.To">Окончание работы</label><br />
+                        @Html.EditorFor(m => m.To,
+    new { htmlAttributes = new { @class = "form-control", @step = 30 } })
+                        <span asp-validation-for="@Model.To" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 text-danger" asp-validation-summary="All"></div>
+                <div class="col-md-12 mt-3 text-center">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary py-3 px-5 text-center">Зарегистрировать</button>
+                        <button type="reset" class="btn btn-primary py-3 px-5 text-center">Сбросить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

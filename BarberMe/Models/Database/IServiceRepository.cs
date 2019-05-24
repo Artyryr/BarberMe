@@ -24,5 +24,10 @@ namespace BarberMe.Models.Database
         void AddSchedule(Schedule schedule);
         void AddService(Service service);
         void AddServiceType(ServiceType type);
+
+        void AddListSchedule(List<Schedule> schedule);
+
+        void RemoveBarber(int id);
+        void RemoveService(int id);
     }
 }

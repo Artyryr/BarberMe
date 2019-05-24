@@ -32,7 +32,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-                <a class="navbar-brand" asp-action="Index" asp-controller="Home">BarberMe</a>
+                <a class="navbar-brand" asp-action="BarbershopIndex" asp-controller="Home">BarberMe</a>
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item"><a asp-action="Index" asp-controller="Home" class="nav-link">Home</a></li>
@@ -43,7 +43,6 @@
                                    aria-expanded="false">Profile</a>
                                 <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                                     <a asp-action="BarbershopIndex" asp-controller="Home" class="dropdown-item">Управление</a>
-                                    @*<a asp-action="UpdateProfile" asp-controller="Home" class="dropdown-item"></a>*@
                                     <a asp-action="Logout" asp-controller="Home" class="dropdown-item">Logout</a>
                                 </div>
                             </li>

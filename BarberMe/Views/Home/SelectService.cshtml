@@ -1,0 +1,60 @@
+﻿@model ServiceBookingModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_customerLayout";
+    ViewBag.Image = "url('/images/Info.png')";
+    ViewBag.Title = "Выбор Барбера";
+    ViewBag.PageName = "Выбор Барбера";
+    ViewBag.Color = "bg-light";
+    ViewBag.Container = "container";
+}
+
+<section class="ftco-section bg-light">
+    <div class="col-md-12 text-center bg-light">
+        <div class="col-md-12">
+            <hr />
+            <h2 class="text-dark col-md-12 text-center">Услуги</h2>
+            <hr />
+        </div>
+    </div>
+    <div class="row text-center">
+        @{
+            foreach (var service in Model.Services)
+            {
+                <div class="col-md-4">
+                    <form asp-action="ServiceBookingSelection" id="@service.ServiceId" method="get" enctype="multipart/form-data">
+                        <div class="col-md-12">
+                            <a onclick="document.getElementById('@service.ServiceId').submit();">
+                                <input asp-for="@Model.BarbershopId" type="hidden">
+                                <input asp-for="@Model.BarberId" type="hidden">
+                                <input asp-for="@Model.ServiceId" value="@service.ServiceId" type="hidden" />
+                                <input asp-for="@Model.ScheduleId" type="hidden" />
+
+                                <hr />
+                                <div class="row justify-content-center mb-4">
+                                    <div class="col-md-12 text-dark">
+                                        @service.ServiceName
+                                    </div>
+                                    <div class="col-md-6 text-primary">
+                                        @service.ServicePrice грн.
+                                    </div>
+                                    <div class="col-md-6 text-primary">
+                                        @service.ServiceDuration мин.
+                                    </div>
+                                    @if (service.ServiceDescription != null && service.ServiceDescription != "")
+                                    {
+                                        <div class="col-md-12">
+                                            @service.ServiceDescription
+                                        </div>
+                                    }
+                                </div>
+                                <hr />
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            }
+        }
+    </div>
+</section>

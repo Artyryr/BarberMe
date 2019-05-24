@@ -17,7 +17,6 @@ namespace BarberMe.Models
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
-        [Required]
         [DataType(DataType.Time)]
         public DateTime Time { get; set; }
         //[Required]

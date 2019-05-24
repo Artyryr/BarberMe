@@ -23,34 +23,38 @@
             @{
                 foreach (var barber in Model.Barbers)
                 {
-                    <div class="col-md-6">
-                        <hr />
-                        <div class="row justify-content-center mb-4">
-                            <div class="col-md-3">
-                                <img src="~/images/Barbers/@barber.PhotoLink" class="rounded-circle" style="max-width: 200px; max-height: 200px;" />
-                            </div>
-                            <div class="col-md-9">
-                                <div class="text-dark" style="font-size:25px;">@barber.LastName @barber.FirstName</div>
-                                <div class="text-dark">@barber.Telephone</div>
-                                <div class="text-dark">@barber.Email</div>
-                                <div class="row justify-content-center mb-4">
-                                    @if (barber.Instagram != null)
-                                    {
-                                        <div class="col-md-6 text-center">
-                                            <img src="~/images/Instagram.png" class="img-fluid" style="max-height: 30px;">
-                                        </div>
-                                    }
-                                    @if (barber.Facebook != null)
-                                    {
-                                        <div class="col-md-6 text-center">
-                                            <img src="~/images/Facebook.png" class="img-fluid" style="max-height: 30px;">
-                                        </div>
-                                    }
-                                </div>
+                    
+            <div class="col-md-6">
+                <a asp-action="EditBarber" asp-route-id="@barber.BarberId">
+                    <hr />
+                    <div class="row justify-content-center mb-4">
+                        <div class="col-md-3">
+                            <img src="~/images/Barbers/@barber.PhotoLink" class="rounded-circle" style="max-width: 200px; max-height: 200px;" />
+                        </div>
+                        <div class="col-md-9">
+                            <div class="text-dark" style="font-size:25px;">@barber.LastName @barber.FirstName</div>
+                            <div class="text-dark">@barber.Telephone</div>
+                            <div class="text-dark">@barber.Email</div>
+                            <div class="row justify-content-center mb-4">
+                                @if (barber.Instagram != null && barber.Instagram != "")
+                                {
+                                    <div class="col-md-6 text-center">
+                                        <img src="~/images/Instagram.png" class="img-fluid" style="max-height: 30px;">
+                                    </div>
+                                }
+                                @if (barber.Facebook != null && barber.Facebook != "")
+                                {
+                                    <div class="col-md-6 text-center">
+                                        <img src="~/images/Facebook.png" class="img-fluid" style="max-height: 30px;">
+                                    </div>
+                                }
                             </div>
                         </div>
-                        <hr />
                     </div>
+                    <hr />
+                </a>
+            </div>
+                    
                 }
             }
         </div>

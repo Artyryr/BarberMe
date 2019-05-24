@@ -1,0 +1,85 @@
+﻿@model Barbershop
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+    ViewBag.Image = "url('/images/Barbershops/" + Model.PhotoLink + "')";
+    ViewBag.Title = Model.Name;
+    ViewBag.PageName = Model.Name;
+    ViewBag.Color = "bg-light";
+    ViewBag.Container = "container";
+}
+
+<section class="ftco-section bg-light">
+    <div class="text-center bg-light">
+        <div class="row justify-content-center mb-2 pb-2">
+            <div class="col-md-10 text-center heading-section ftco-animate">
+                <h1 class="text-dark text-capitalize" style="font-size:60px;">@Model.Name</h1>
+            </div>
+            <div class="col-md-12 mt-3">
+                <div class="form-group">
+                    <a class="btn btn-primary py-3 px-5 text-center" asp-action="EditBarbershop" asp-route-id="@Model.BarbershopId">Обновить Информацию</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-6 bg-dark">
+            <div class="row justify-content-center mb-4 text-center">
+                <div class="col-md-12">
+                    <hr style="color: white" />
+                    <h2 class="text-white col-md-12 text-center">Описание</h2>
+                    <hr style="color: white" />
+                </div>
+                <p class="text-center text-white" style="font-size:25px;">
+                    @Model.Description
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6 text-center bg-light">
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-12">
+                    <hr />
+                    <h2 class="text-dark  text-center">Контактная информация</h2>
+                    <hr />
+                </div>
+
+                <div class="col-3 text-dark " style="font-size:25px;">Адресс:</div>
+                <div class="col-md-9 text-dark" style="font-size:25px;">@Model.Address</div>
+                <div class="col-3 text-dark " style="font-size:25px;">Телефон:</div>
+                <div class="col-md-9 text-dark " style="font-size:25px;">@Model.Telephone</div>
+                <div class="col-3 text-dark " style="font-size:25px;">E-mail:</div>
+                <div class="col-md-9 text-dark " style="font-size:25px;">@Model.Email</div>
+
+                <div class="col-md-12">
+                    <hr />
+                    <h2 class="text-dark col-md-12 text-center">Социальные сети</h2>
+                    <hr />
+                </div>
+                @if (Model.Instagram != null)
+                {
+                    <div class="col-md-6 text-center">
+                        <a href="@Model.Instagram">
+                            <img src="~/images/Instagram.png" class="img-fluid" style="max-height: 50px;">
+                        </a>
+                    </div>
+                }
+                @if (Model.Facebook != null)
+                {
+                    <div class="col-md-6 text-center">
+                        <a href="@Model.Facebook">
+                            <img src="~/images/Facebook.png" class="img-fluid" style="max-height: 50px;">
+                        </a>
+                    </div>
+                }
+                @if (@Model.Geoposition != null)
+                {
+                    <div class="col-md-12 text-center">
+                        <hr />
+                        @Html.Raw(Model.Geoposition);
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

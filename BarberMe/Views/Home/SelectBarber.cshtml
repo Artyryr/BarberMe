@@ -1,0 +1,59 @@
+﻿@model ServiceBookingModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_customerLayout";
+    ViewBag.Image = "url('/images/Info.png')";
+    ViewBag.Title = "Выбор Барбера";
+    ViewBag.PageName = "Выбор Барбера";
+    ViewBag.Color = "bg-light";
+    ViewBag.Container = "container";
+}
+
+<section class="ftco-section bg-light">
+    <div class="col-md-12 text-center bg-light">
+        <div class="col-md-12">
+            <hr />
+            <h2 class="text-dark col-md-12 text-center">Барберы</h2>
+            <hr />
+        </div>
+    </div>
+    <div class="row text-center">
+        @{
+            foreach (var barber in Model.Barbers)
+            {
+                <div class="col-md-6">
+                    <form asp-action="ServiceBookingSelection" id="@barber.BarberId" method="get" enctype="multipart/form-data">
+                        <div class="col-md-12">
+                            <a onclick="document.getElementById('@barber.BarberId').submit();">
+                                <input asp-for="@Model.BarbershopId" type="hidden">
+                                <input asp-for="@Model.BarberId" value="@barber.BarberId" type="hidden">
+                                <input asp-for="@Model.ServiceId" type="hidden" />
+                                <input asp-for="@Model.ScheduleId" type="hidden" />
+                                <div class="row justify-content-center mb-4">
+                                    <div class="col-md-3">
+                                        <img src="~/images/Barbers/@barber.PhotoLink" class="rounded-circle" style="max-width: 200px; max-height: 200px;" />
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="text-dark" style="font-size:25px;">@barber.LastName @barber.FirstName</div>
+                                        <div class="text-dark">@barber.Telephone</div>
+                                        <div class="text-dark">@barber.Email</div>
+                                        <div class="row justify-content-center mb-4">
+                                            <div class="col-md-12 text-center">
+                                                <a asp-action="BarberPage" asp-route-id="@barber.BarberId">
+                                                    <p>Детальная информация</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <hr />
+                        </div>
+
+                    </form>
+                </div>
+            }
+        }
+    </div>
+</section>

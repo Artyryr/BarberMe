@@ -95,11 +95,18 @@ namespace BarberMe.Migrations.ApplicationDb
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Email");
+                    b.Property<int?>("BarberId");
 
-                    b.Property<string>("FirstName");
+                    b.Property<int?>("BarbershopId");
 
-                    b.Property<string>("LastName");
+                    b.Property<string>("Email")
+                        .IsRequired();
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
 
                     b.Property<int?>("PaymentId");
 
@@ -109,9 +116,14 @@ namespace BarberMe.Migrations.ApplicationDb
 
                     b.Property<int?>("ServiceId");
 
-                    b.Property<string>("Telephone");
+                    b.Property<string>("Telephone")
+                        .IsRequired();
 
                     b.HasKey("OrderId");
+
+                    b.HasIndex("BarberId");
+
+                    b.HasIndex("BarbershopId");
 
                     b.HasIndex("PaymentId");
 
@@ -150,6 +162,8 @@ namespace BarberMe.Migrations.ApplicationDb
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("BarberId");
+
+                    b.Property<DateTime>("Date");
 
                     b.Property<string>("Description")
                         .IsRequired();
@@ -198,8 +212,7 @@ namespace BarberMe.Migrations.ApplicationDb
 
                     b.Property<int>("BarbershopId");
 
-                    b.Property<string>("ServiceDescription")
-                        .IsRequired();
+                    b.Property<string>("ServiceDescription");
 
                     b.Property<int>("ServiceDuration");
 
@@ -244,6 +257,14 @@ namespace BarberMe.Migrations.ApplicationDb
 
             modelBuilder.Entity("BarberMe.Models.Order", b =>
                 {
+                    b.HasOne("BarberMe.Models.Barber", "Barber")
+                        .WithMany()
+                        .HasForeignKey("BarberId");
+
+                    b.HasOne("BarberMe.Models.Barbershop", "Barbershop")
+                        .WithMany()
+                        .HasForeignKey("BarbershopId");
+
                     b.HasOne("BarberMe.Models.Payment", "Payment")
                         .WithMany()
                         .HasForeignKey("PaymentId");

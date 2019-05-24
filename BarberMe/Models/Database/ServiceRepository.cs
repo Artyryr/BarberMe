@@ -56,6 +56,15 @@ namespace BarberMe.Models.Database
             context.SaveChanges();
         }
 
+        public void RemoveBarber(int id)
+        {
+            if (context.Barbers.Where(p => p.BarberId == id).FirstOrDefault() != null)
+            {
+                context.Barbers.Remove(context.Barbers.Where(p => p.BarberId == id).FirstOrDefault());
+            }
+            context.SaveChanges();
+        }
+
         public void AddBarbershop(Barbershop barbershop)
         {
             if (barbershop.BarbershopId == 0)
@@ -144,7 +153,6 @@ namespace BarberMe.Models.Database
                     .FirstOrDefault(p => p.ReviewId == review.ReviewId);
                 if (dbEntry != null)
                 {
-
                     dbEntry.BarberId = review.BarberId;
                     dbEntry.UserName = review.UserName;
                     dbEntry.Email = review.Email;
@@ -177,6 +185,31 @@ namespace BarberMe.Models.Database
             context.SaveChanges();
         }
 
+        public void AddListSchedule(List<Schedule> schedules)
+        {
+            foreach (var schedule in schedules)
+            {
+                if (schedule.ScheduleId == 0)
+                {
+                    context.Schedules.Add(schedule);
+                }
+                else
+                {
+                    Schedule dbEntry = context.Schedules
+                        .FirstOrDefault(p => p.ScheduleId == schedule.ScheduleId);
+                    if (dbEntry != null)
+                    {
+
+                        dbEntry.BarberId = schedule.BarberId;
+                        dbEntry.Date = schedule.Date;
+                        dbEntry.Time = schedule.Time;
+                        dbEntry.Availability = schedule.Availability;
+                    }
+                }
+                context.SaveChanges();
+            }
+        }
+
         public void AddService(Service service)
         {
             if (service.ServiceId == 0)
@@ -197,6 +230,15 @@ namespace BarberMe.Models.Database
                     dbEntry.ServiceDuration = service.ServiceDuration;
                     dbEntry.ServicePrice = service.ServicePrice;
                 }
+            }
+            context.SaveChanges();
+        }
+
+        public void RemoveService(int id)
+        {
+            if (context.Services.Where(p => p.ServiceId == id).FirstOrDefault() != null)
+            {
+                context.Services.Remove(context.Services.Where(p => p.ServiceId == id).FirstOrDefault());
             }
             context.SaveChanges();
         }

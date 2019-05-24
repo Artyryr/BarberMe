@@ -1,60 +1,77 @@
-﻿@model BarberRegistrationModel
+﻿@model EditBarbershopModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     Layout = "_layout";
     ViewBag.Image = "url('/images/Registration.png')";
-    ViewBag.Title = "Редактирование Барбера";
-    ViewBag.PageName = "Редактирование Барбера";
+    ViewBag.Title = "Редактирование Барбершопа";
+    ViewBag.PageName = "Редактирование Барбершопа";
     ViewBag.Color = "bg-light";
     ViewBag.Container = "container";
 }
 
 <div class="row d-flex">
     <div class="col-md-12 ftco-animate makereservation p-5 bg-light fadeInUp ftco-animated">
-        <form asp-action="AddBarberPage" method="post" enctype="multipart/form-data">
+        <form asp-action="EditBarbershop" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-12">
-                    <input asp-for="@Model.barbershopId" type="hidden" />
+                    <input asp-for="@Model.Barbershop.BarbershopId" type="hidden" />
+                    <input asp-for="@Model.Barbershop.BarbershopUserId" type="hidden" />
+                    <input asp-for="@Model.Barbershop.BarbershopId" type="hidden" />
+                    <input asp-for="@Model.Barbershop.PhotoLink" type="hidden" />
 
                     <div class="form-group">
-                        <label asp-for="@Model.Barber.Email">E-mail</label>
-                        <input asp-for="@Model.Barber.Email" type="email" class="form-control" placeholder="E-mail" data-val="true" data-val-required="The E-mail is required.">
-                        <span asp-validation-for="@Model.Barber.Email" class="text-danger"></span>
+                        <label asp-for="@Model.Barbershop.Email">E-mail</label>
+                        <input asp-for="@Model.Barbershop.Email" type="email" class="form-control" placeholder="E-mail" data-val="true" required data-val-required=" Введите E-mail .">
+                        <span asp-validation-for="@Model.Barbershop.Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="@Model.Barbershop.Name">Название Барбершопа</label>
+                        <input asp-for="@Model.Barbershop.Name" type="text" class="form-control" placeholder="Название Барбершопа" data-val="true" data-val-required="Введите Имя">
+                        <span asp-validation-for="@Model.Barbershop.Name" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label asp-for="@Model.Barber.FirstName">Имя</label>
-                        <input asp-for="@Model.Barber.FirstName" type="text" class="form-control" placeholder="Имя" data-val="true" data-val-required="The Name is required.">
-                        <span asp-validation-for="@Model.Barber.FirstName" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="@Model.Barber.LastName">Фамилия</label>
-                        <input asp-for="@Model.Barber.LastName" type="text" class="form-control" placeholder="Фамилия" data-val="true" data-val-required="The Last Name is required.">
-                        <span asp-validation-for="@Model.Barber.LastName" class="text-danger"></span>
+                        <label asp-for="@Model.Barbershop.Address">Адрес</label>
+                        <input asp-for="@Model.Barbershop.Address" type="text" class="form-control" placeholder="Адрес" data-val="true" data-val-required="введите Адрес.">
+                        <span asp-validation-for="@Model.Barbershop.Address" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Телефон</label>
-                        <input asp-for="@Model.Barber.Telephone" type="text" class="form-control" placeholder="Номер телефона" data-val="true" data-val-required="The Telephone is required.">
-                        <span asp-validation-for="@Model.Barber.Telephone" class="text-danger"></span>
+                        <input asp-for="@Model.Barbershop.Telephone" type="text" class="form-control" placeholder="Номер телефона" data-val="true" data-val-required="введите номер телефона.">
+                        <span asp-validation-for="@Model.Barbershop.Telephone" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Детальная информация</label>
+                        <textarea asp-for="@Model.Barbershop.Description" rows="5" class="form-control" placeholder="Детальная информация" data-val="true" data-val-required="Введите Описание."></textarea>
+                        <span asp-validation-for="@Model.Barbershop.Description" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Instagram</label>
-                        <input asp-for="@Model.Barber.Instagram" type="text" class="form-control" placeholder="Ссылка на Instagram " data-val="true" data-val-required="The Description is required.">
-                        <span asp-validation-for="@Model.Barber.Instagram" class="text-danger"></span>
+                        <input asp-for="@Model.Barbershop.Instagram" type="text" class="form-control" placeholder="Ссылка на Instagram " data-val="true" data-val-required="The Description is required.">
+                        <span asp-validation-for="@Model.Barbershop.Instagram" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Facebook</label>
-                        <input asp-for="@Model.Barber.Facebook" type="text" class="form-control" placeholder="Ссылка на Facebook" data-val="true" data-val-required="The Description is required." />
-                        <span asp-validation-for="@Model.Barber.Facebook" class="text-danger"></span>
+                        <input asp-for="@Model.Barbershop.Facebook" type="text" class="form-control" placeholder="Ссылка на Facebook" data-val="true" data-val-required="The Description is required." />
+                        <span asp-validation-for="@Model.Barbershop.Facebook" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Геопозиция</label>
+                        <input asp-for="@Model.Barbershop.Geoposition" type="text" class="form-control" placeholder="Геопозиция в Google Maps" data-val="true" data-val-required="The Description is required." />
+                        <span asp-validation-for="@Model.Barbershop.Geoposition" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -66,17 +83,23 @@
                             Выбрать Изображение
                         </div>
                         <div>
-                            <input asp-for="@Model.BarberImage" id="addImage" type="file" accept="image/*" name="BarberImage" value="Выбрать изображение" class="invisible" /><br />
+                            <input asp-for="barbershopImage" id="addImage" type="file" accept="image/*" name="barbershopImage" value="Выбрать изображение" class="invisible" /><br />
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12 text-danger" asp-validation-summary="All"></div>
+
                 <div class="col-md-12 mt-3 text-center">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary py-3 px-5 text-center">Зарегистрировать</button>
-                        <button type="reset" class="btn btn-primary py-3 px-5 text-center">Сбросить</button>
+                        <button type="submit" class="btn btn-primary py-3 px-5 text-center">Изменить</button>
+                        <a asp-action="BarbershopInfo" asp-route-id="@Model.Barbershop.BarbershopId" class="btn btn-primary py-3 px-5 text-center">Отменить </a>
                     </div>
                 </div>
+                @*<div class="col-md-12 mt-3 text-center">
+                    <div class="form-group">
+                        <a asp-action="DeleteBarbershop" asp-route-id="@Model.BarbershopId" class="btn btn-danger py-3 px-5 text-center">Удалить Барбе </a>
+                    </div>
+                </div>*@
             </div>
         </form>
     </div>
