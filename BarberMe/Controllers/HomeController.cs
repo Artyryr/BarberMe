@@ -111,7 +111,7 @@ namespace BarberMe.Controllers
 
                                 Barbershop barbershop = new Barbershop(createdUser.Id, model.Email, model.Name, model.Address,
                     model.Telephone, model.Description, model.Instagram, model.Facebook,
-                    model.Geoposition);
+                    model.Geoposition, "NotFound.png");
 
                                 repository.AddBarbershop(barbershop);
 
@@ -554,29 +554,29 @@ namespace BarberMe.Controllers
         }
 
         [HttpGet]
-        public ViewResult BarberBookingPage(int id)
+        public ViewResult SelectSchedule(ServiceBookingModel model)
         {
-            // barberb -> service -> date 
-            int serviceId = 1;
-            Barber barber = repository.Barbers.Where(b => b.BarberId == id).FirstOrDefault();
-            Service service = repository.Service.Where(s => s.ServiceId == serviceId).FirstOrDefault();
+            Barber barber = repository.Barbers.Where(b => b.BarberId == model.BarberId).FirstOrDefault();
+            Service service = repository.Service.Where(s => s.ServiceId == model.ServiceId).FirstOrDefault();
 
             int amountOfSections = service.ServiceDuration / 30;
 
             List<Schedule> schedules = (from schedule in repository.Schedules
                                         where schedule.BarberId == barber.BarberId
+                                        && schedule.Availability == true
                                         orderby schedule.Date
                                         select schedule).ToList();
 
             List<List<Schedule>> relevantSchedules = new List<List<Schedule>>() { };
 
-            List<Schedule> foundSequence = new List<Schedule>() { };
             if (amountOfSections == 2)
             {
                 for (int i = 0; i < schedules.Count - 1; i++)
                 {
                     if(schedules[i + 1].Date == schedules[i].Date.AddMinutes(30))
                     {
+                        List<Schedule> foundSequence = new List<Schedule>() { };
+
                         foundSequence.Add(schedules[i]);
                         foundSequence.Add(schedules[i + 1]);
 
@@ -589,6 +589,8 @@ namespace BarberMe.Controllers
                 {
                     if (schedules[i + 1].Date == schedules[i].Date.AddMinutes(30) && schedules[i + 2].Date == schedules[i + 1].Date.AddMinutes(30))
                     {
+                        List<Schedule> foundSequence = new List<Schedule>() { };
+
                         foundSequence.Add(schedules[i]);
                         foundSequence.Add(schedules[i + 1]);
                         foundSequence.Add(schedules[i + 2]);
@@ -603,6 +605,8 @@ namespace BarberMe.Controllers
                     if (schedules[i + 1].Date == schedules[i].Date.AddMinutes(30) && schedules[i + 2].Date == schedules[i + 1].Date.AddMinutes(30) 
                         && schedules[i + 3].Date == schedules[i + 2].Date.AddMinutes(30))
                     {
+                        List<Schedule> foundSequence = new List<Schedule>() { };
+
                         foundSequence.Add(schedules[i]);
                         foundSequence.Add(schedules[i + 1]);
                         foundSequence.Add(schedules[i + 2]);
@@ -619,6 +623,8 @@ namespace BarberMe.Controllers
                     if (schedules[i + 1].Date == schedules[i].Date.AddMinutes(30) && schedules[i + 2].Date == schedules[i + 1].Date.AddMinutes(30)
                         && schedules[i + 3].Date == schedules[i + 2].Date.AddMinutes(30) && schedules[i + 4].Date == schedules[i + 3].Date.AddMinutes(30))
                     {
+                        List<Schedule> foundSequence = new List<Schedule>() { };
+
                         foundSequence.Add(schedules[i]);
                         foundSequence.Add(schedules[i + 1]);
                         foundSequence.Add(schedules[i + 2]);
@@ -632,14 +638,79 @@ namespace BarberMe.Controllers
             else {
                 foreach (var schedule in schedules)
                 {
+                    List<Schedule> foundSequence = new List<Schedule>() { };
+
                     foundSequence.Add(schedule);
 
                     relevantSchedules.Add(foundSequence);
                 }
             }
 
-            //BarberPageModel model = new BarberPageModel { Barber = barber, Reviews = reviews, Barbershop = barbershop };
-            return View();
+            model.RelevantSchedules = relevantSchedules;
+            
+            return View(model);
+        }
+
+        [HttpGet]
+        public ViewResult EnterCustomerInfo(ServiceBookingModel model)
+        {
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult SummaryInfo(ServiceBookingModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Barber barber = repository.Barbers.Where(b => b.BarberId == model.BarberId).FirstOrDefault();
+                Barbershop barbershop = repository.Barbershops.Where(b => b.BarbershopId == model.BarbershopId).FirstOrDefault();
+                Service service = repository.Service.Where(b => b.ServiceId == model.ServiceId).FirstOrDefault();
+                Schedule schedule = repository.Schedules.Where(s => s.ScheduleId == model.ScheduleId).FirstOrDefault();
+
+                Order order = model.Order;
+                order.Barber = barber;
+                order.Barbershop = barbershop;
+                order.Service = service;
+                order.Schedule = schedule;
+                order.Price = service.ServicePrice;
+
+                if (model.Payment != null)
+                {
+                    repository.AddPayment(model.Payment);
+
+                    Payment payment = repository.Payments.Where(p => p == model.Payment).FirstOrDefault();
+                    order.Payment = payment;
+                }
+
+                model.Order = order;
+
+                int amountOfSections = service.ServiceDuration / 30;
+                List<Schedule> schedules = (from sch in repository.Schedules
+                                            where sch.BarberId == barber.BarberId
+                                            && sch.Availability == true
+                                            orderby sch.Date
+                                            select sch).ToList();
+
+                List<Schedule> relevantSchedules = new List<Schedule>() { };
+                int position = schedules.IndexOf(schedule);
+
+                for(int i = 0; i < amountOfSections; i++)
+                {
+                    relevantSchedules.Add(schedules[position + i]);
+                }
+
+                foreach (var item in relevantSchedules)
+                {
+                    item.Availability = false;
+                    repository.AddSchedule(item);
+                }
+
+                model.Order = order;
+
+                repository.AddOrder(order);
+                return View("SummaryInfo", model);
+            }
+            return View("EnterCustomerInfo", model);
         }
     }
 }

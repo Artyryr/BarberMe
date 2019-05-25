@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Home\EnterCustomerInfo.cshtml" />
     <Content Remove="Views\Home\Index.cshtml" />
   </ItemGroup>
 
@@ -15,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Home\EnterCustomerInfo.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
   </ItemGroup>
 

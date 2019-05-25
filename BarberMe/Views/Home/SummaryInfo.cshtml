@@ -1,0 +1,83 @@
+﻿@model ServiceBookingModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_customerLayout";
+    ViewBag.Image = "url('/images/Info.png')";
+    ViewBag.Title = "Информация о Бронирования";
+    ViewBag.PageName = "Информация о Бронирования";
+    ViewBag.Color = "bg-light";
+    ViewBag.Container = "container";
+}
+
+
+<section class="ftco-section bg-light">
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-12 bg-light">
+            <div class="row justify-content-center mb-4 text-center">
+                <div class="col-md-12">
+                    <hr />
+                    <h2 class="text-white col-md-12 text-center text-primary">Заказ!</h2>
+                    <hr />
+
+                    @*<div class="row justify-content-center mb-4 text-center">
+                        <div class="col-md-12">
+                            <h2>Барбер</h2>
+                            <hr />
+                        </div>
+                        <div class="col-md-12">
+                            <img src="~/images/Barbers/@Model.Order.Barber.PhotoLink">
+                        </div>
+                        <div class="col-md-12">
+                            <p>@Model.Order.Barber.FirstName @Model.Order.Barber.LastName</p>
+                        </div>
+                        <div class="col-md-12">
+                            <hr />
+                            <h2>Услуга</h2>
+                            <hr />
+                        </div>
+                        <div class="col-md-12">
+                            <hr />
+                            <div class="row justify-content-center mb-4">
+                                <div class="col-md-12 text-dark">
+                                    @Model.Order.Service.ServiceName
+                                </div>
+                                <div class="col-md-6 text-primary">
+                                    @Model.Order.Service.ServicePrice грн.
+                                </div>
+                                <div class="col-md-6 text-primary">
+                                    @Model.Order.Service.ServiceDuration мин.
+                                </div>
+                                @if (Model.Order.Service.ServiceDescription != null && Model.Order.Service.ServiceDescription != "")
+                                {
+                                    <div class="col-md-12">
+                                        @Model.Order.Service.ServiceDescription
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <hr />
+                            <h2>Дата и Время</h2>
+                            <hr />
+                        </div>
+                        <div class="col-md-12">
+                            <hr />
+                            <div class="row justify-content-center mb-4">
+                                <div class="col-md-6 text-primary">
+                                    Дата: @Model.Order.Schedule.Date.Day.@Model.Order.Schedule.Date.Month.@Model.Order.Schedule.Date.Year
+                                </div>
+                                <div class="col-md-6 text-primary">
+                                    Время: @Model.Order.Schedule.Date.Hour.@Model.Order.Schedule.Date.Minute
+                                </div>
+                            </div>
+                            <hr />
+                        </div>
+
+                    </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

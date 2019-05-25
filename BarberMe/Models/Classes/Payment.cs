@@ -18,7 +18,7 @@ namespace BarberMe.Models
         public DateTime ExpiryDate { get; set; }
 
         [Required]
-        public int CVV { get; set; }
+        public string CVV { get; set; }
 
         [Required]
         public string CardOwner { get; set; }

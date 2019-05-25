@@ -17,6 +17,8 @@ namespace BarberMe.Models.PagesModels
         public List<List<Schedule>> RelevantSchedules { get; set; }
         public Payment Payment { get; set; }
 
+        public bool IsPaymentUsed { get; set; }
+        public List<Schedule> SelectedSchedules { get; set; }
         public int BarbershopId { get; set; }
         public int BarberId { get; set; }
         public int ServiceId { get; set; }

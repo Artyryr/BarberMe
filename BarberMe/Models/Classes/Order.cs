@@ -16,7 +16,9 @@ namespace BarberMe.Models
         public Schedule Schedule { get; set; }
 
         public Payment Payment { get; set; }
+
         public Barber Barber { get; set; }
+
         public Barbershop Barbershop { get; set; }
 
         public double Price { get; set; }

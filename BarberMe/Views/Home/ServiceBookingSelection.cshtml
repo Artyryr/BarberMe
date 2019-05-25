@@ -22,7 +22,8 @@
                     <input asp-for="@Model.BarbershopId" type="hidden" />
                     <input asp-for="@Model.BarberId" type="hidden" />
                     <input asp-for="@Model.ServiceId" type="hidden" />
-                    <input asp-for="@Model.ScheduleId" type="hidden" />
+                    @*<input asp-for="@Model.ScheduleId" type="hidden" />
+                        <input asp-for="@Model.SelectedSchedules" type="hidden" />*@
 
                     <a onclick="document.getElementById('BarberForm').submit();">
                         <div class="row justify-content-center mb-4">
@@ -74,7 +75,8 @@
                     <input asp-for="@Model.BarbershopId" type="hidden" />
                     <input asp-for="@Model.BarberId" type="hidden" />
                     <input asp-for="@Model.ServiceId" type="hidden" />
-                    <input asp-for="@Model.ScheduleId" type="hidden" />
+                    @*<input asp-for="@Model.ScheduleId" type="hidden" />
+                        <input asp-for="@Model.SelectedSchedules" type="hidden" />*@
 
                     <a onclick="document.getElementById('ServiceForm').submit();">
                         <div class="row justify-content-center mb-4">
@@ -105,7 +107,6 @@
                                                 </div>
                                             }
                                         </div>
-                                        @*<hr />*@
                                     </div>
                                 }
                                 <hr />
@@ -121,6 +122,7 @@
                         <input asp-for="@Model.BarberId" type="hidden" />
                         <input asp-for="@Model.ServiceId" type="hidden" />
                         <input asp-for="@Model.ScheduleId" type="hidden" />
+                        <input asp-for="@Model.SelectedSchedules" type="hidden" />
 
                         <a onclick="document.getElementById('ScheduleForm').submit();">
                             <div class="row justify-content-center mb-4">
@@ -133,24 +135,14 @@
                                         <div class="col-md-12">
                                             <hr />
                                             <div class="row justify-content-center mb-4">
-                                                <div class="col-md-12 text-dark">
-                                                    @Model.Service.ServiceName
+                                                <div class="col-md-6 text-primary">
+                                                    Дата: @Model.Schedule.Date.Day.@Model.Schedule.Date.Month.@Model.Schedule.Date.Year
                                                 </div>
-                                                <div class="col-md-6">
-                                                    @Model.Service.ServicePrice грн.
+                                                <div class="col-md-6 text-primary">
+                                                    Время: @Model.Schedule.Date.Hour.@Model.Schedule.Date.Minute
                                                 </div>
-                                                <div class="col-md-6">
-                                                    @Model.Service.ServiceDuration мин.
-                                                </div>
-                                                @if (Model.Service.ServiceDescription != null && Model.Service.ServiceDescription != "")
-                                                {
-                                                    <div class="col-md-12">
-                                                        @Model.Service.ServiceDescription
-                                                    </div>
-                                                }
                                             </div>
-                                            <hr />
-
+                                            
                                         </div>
                                     }
                                     <hr />
@@ -161,11 +153,37 @@
                 }
 
                 <div class="col-md-12 text-center">
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         @if (Model.ServiceId != null && Model.ServiceId != 0 && Model.BarberId != null && Model.BarberId != 0
-                          && Model.ScheduleId != null && Model.ScheduleId != 0)
+&& Model.ScheduleId != null && Model.ScheduleId != 0)
                         {
-                            <a class="btn btn-primary py-3 px-5 text-center" asp-route-model="@Model">Оформить визит</a>
+                            <form id="SubmitForm" asp-action="EnterCustomerInfo" method="get">
+                                <input asp-for="@Model.BarbershopId" type="hidden" />
+                                <input asp-for="@Model.BarberId" type="hidden" />
+                                <input asp-for="@Model.ServiceId" type="hidden" />
+                                <input asp-for="@Model.ScheduleId" type="hidden" />
+                                <div class="row justify-content-center mb-4">
+                                    <div class="col-md-8 text-center">
+                                        <div class="row justify-content-center mb-4">
+                                            <div class="col-md-12 text-center">
+                                                <hr />
+                                                <h3>Способ Оплаты</h3>
+                                                <hr />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="radio" asp-for="@Model.IsPaymentUsed" value="false" checked>
+                                                <label asp-for="@Model.IsPaymentUsed" class="text-primary">Оплата в Барбершопе</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="radio" asp-for="@Model.IsPaymentUsed" value="true">
+                                                <label asp-for="@Model.IsPaymentUsed" class="text-primary">Оплата Картой</label>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                    </div>
+                                </div>
+                                <a class="btn btn-primary py-3 px-5 text-center" onclick="document.getElementById('SubmitForm').submit();">Оформить визит</a>
+                            </form>
                         }
                         else
                         {

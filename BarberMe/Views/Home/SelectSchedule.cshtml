@@ -1,0 +1,52 @@
+﻿@model ServiceBookingModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_customerLayout";
+    ViewBag.Image = "url('/images/Info.png')";
+    ViewBag.Title = "Выбор Model.Schedule";
+    ViewBag.PageName = "Выбор Даты и Времени";
+    ViewBag.Color = "bg-light";
+    ViewBag.Container = "container-fluid";
+}
+
+<section class="ftco-section bg-light">
+    <div class="col-md-12 text-center bg-light">
+        <div class="col-md-12">
+            <hr />
+            <h2 class="text-dark col-md-12 text-center">Дата и Время</h2>
+            <hr />
+        </div>
+    </div>
+    <div class="row text-center">
+        @{
+            foreach (var schedule in Model.RelevantSchedules)
+            {
+                <div class="col-md-4">
+                    <form asp-action="ServiceBookingSelection" id="@schedule[0].ScheduleId" method="get" enctype="multipart/form-data">
+                        <div class="row justify-content-center mb-4">
+                            <div class="col-md-12">
+                                <a onclick="document.getElementById('@schedule[0].ScheduleId').submit();">
+                                    <input asp-for="@Model.BarbershopId" type="hidden">
+                                    <input asp-for="@Model.BarberId" type="hidden">
+                                    <input asp-for="@Model.ServiceId" type="hidden" />
+                                    <input asp-for="@Model.ScheduleId" value="@schedule[0].ScheduleId" type="hidden" />
+
+                                    <div class="row justify-content-center mb-4">
+                                        <div class="col-md-6 ">
+                                            Дата: @schedule[0].Date.Day.@schedule[0].Date.Month.@schedule[0].Date.Year
+                                        </div>
+                                        <div class="col-md-6">
+                                            Время: @schedule[0].Date.Hour.@schedule[0].Date.Minute
+                                        </div>
+                                    </div>
+                                </a>
+                                <hr />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            }
+        }
+    </div>
+</section>

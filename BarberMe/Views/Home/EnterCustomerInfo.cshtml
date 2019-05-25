@@ -1,0 +1,95 @@
+﻿@model ServiceBookingModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_customerLayout";
+    ViewBag.Image = "url('/images/Info.png')";
+    ViewBag.Title = "Персональная Информация";
+    ViewBag.PageName = "Персональная Информация";
+    ViewBag.Color = "bg-light";
+    ViewBag.Container = "container";
+}
+
+<div class="row d-flex">
+    <div class="col-md-12 ftco-animate makereservation p-5 bg-light fadeInUp ftco-animated">
+        <form asp-action="SummaryInfo" method="post" enctype="multipart/form-data">
+            <input asp-for="@Model.BarbershopId" type="hidden" />
+            <input asp-for="@Model.BarberId" type="hidden" />
+            <input asp-for="@Model.ServiceId" type="hidden" />
+            <input asp-for="@Model.ScheduleId" type="hidden" />
+
+            <div class="row">
+                <h2 class="col-md-12 text-center">Контактная Информация</h2>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.Order.LastName">Фамилия</label>
+                        <input asp-for="@Model.Order.LastName" type="text" class="form-control" placeholder="Фамилия" data-val="true" required data-val-required="Введите Фамилию.">
+                        <span asp-validation-for="@Model.Order.LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.Order.FirstName">Имя</label>
+                        <input asp-for="@Model.Order.FirstName" type="text" class="form-control" placeholder="Имя" data-val="true" required data-val-required="Введите Имя.">
+                        <span asp-validation-for="@Model.Order.FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.Order.Email">E-mail</label>
+                        <input asp-for="@Model.Order.Email" type="email" class="form-control" placeholder="E-mail" data-val="true" required data-val-required="Введите E-mail.">
+                        <span asp-validation-for="@Model.Order.Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.Order.Telephone">Телефон</label>
+                        <input asp-for="@Model.Order.Telephone" type="tel" class="form-control" placeholder="Номер Телефона" data-val="true" required data-val-required="Введите Номер Телефона.">
+                        <span asp-validation-for="@Model.Order.Telephone" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @if (Model.IsPaymentUsed)
+                {
+                <h2 class="col-md-12 text-center">Оплата</h2>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="@Model.Payment.CardNumber">Номер Карты</label>
+                        <input asp-for="@Model.Payment.CardNumber" type="text" class="form-control" placeholder="Номер Карты" data-val="true" required data-val-required="Введите Номер Карты.">
+                        <span asp-validation-for="@Model.Payment.CardNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.Payment.CVV">CVV</label>
+                        <input asp-for="@Model.Payment.CVV" type="text" class="form-control" placeholder="CVV" data-val="true" required data-val-required="Введите CVV.">
+                        <span asp-validation-for="@Model.Payment.CVV" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.Payment.ExpiryDate">Срок Действия Карты</label><br />
+                        <input asp-for="@Model.Payment.ExpiryDate" type="date" asp-format="{0:DD-MM-yyyy}" class="form-control" required data-val="true" data-val-required="Выберите Дату." />
+                        <span asp-validation-for="@Model.Payment.ExpiryDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="@Model.Payment.CardOwner">Владелец Карты</label>
+                        <input asp-for="@Model.Payment.CardOwner" type="text" class="form-control" placeholder="Владелец Карты" data-val="true" required data-val-required="Требуется владелец карты.">
+                        <span asp-validation-for="@Model.Payment.CardOwner" class="text-danger"></span>
+                    </div>
+                </div>
+                }
+                <div class="col-md-12 text-danger" asp-validation-summary="All"></div>
+                <div class="col-md-12 mt-3 text-center">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary py-3 px-5 text-center">Записаться</button>
+                        <button type="reset" class="btn btn-primary py-3 px-5 text-center">Сбросить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
