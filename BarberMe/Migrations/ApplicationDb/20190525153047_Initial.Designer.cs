@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BarberMe.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190524130016_Initial")]
+    [Migration("20190525153047_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -142,7 +142,8 @@ namespace BarberMe.Migrations.ApplicationDb
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CVV");
+                    b.Property<string>("CVV")
+                        .IsRequired();
 
                     b.Property<string>("CardNumber")
                         .IsRequired();

@@ -453,6 +453,42 @@ namespace BarberMe.Controllers
             return View(model);
         }
 
+        [Authorize]
+        [HttpGet]
+        public ActionResult OrdersPage(int id)
+        {
+            Barbershop barbershop = repository.Barbershops.Where(b => b.BarbershopId == id).FirstOrDefault();
+            List<Barber> barbers = repository.Barbers.Where(b => b.BarbershopId == id).ToList();
+            List<Order> allOrders = repository.Orders.Where(b => b.Barbershop.BarbershopId == id).
+                Where(o => o.Schedule.Date.Day == DateTime.Today.Day && o.Schedule.Date.Month == DateTime.Today.Month && o.Schedule.Date.Year == DateTime.Today.Date.Year)
+                .OrderBy(o => o.Schedule.Date)
+                .ToList();
+
+            Dictionary<int, List<Order>> orders = new Dictionary<int, List<Order>>() { };
+
+            foreach (var barber in barbers)
+            {
+                List<Order> barberOrders = new List<Order>();
+                foreach (var order in allOrders)
+                {
+                    Schedule sched = repository.Schedules.Where(p => p.ScheduleId == order.Schedule.ScheduleId).FirstOrDefault();
+                    Service serv = repository.Service.Where(p => p.ServiceId == order.Service.ServiceId).FirstOrDefault();
+
+                    order.Schedule = sched;
+                    order.Service = serv;
+
+                    if(order.Barber.BarberId == barber.BarberId)
+                    {
+                        barberOrders.Add(order);
+                    }
+                }
+                orders.Add(barber.BarberId, barberOrders);
+            }
+
+            OrdersPageModel model = new OrdersPageModel { Barbers = barbers, Orders = orders };
+            return View(model);
+        }
+
         //------------------------------  
 
         [HttpGet]
@@ -496,8 +532,6 @@ namespace BarberMe.Controllers
         [HttpGet]
         public ViewResult ServiceBookingSelection(ServiceBookingModel model)
         {
-            //List<Barber> barbers = repository.Barbers.Where(b => b.BarbershopId == model.BarbershopId).ToList();
-            //List<Service> services = repository.Service.Where(s => s.BarbershopId == model.BarbershopId).ToList();
 
             if (model.BarberId != null && model.BarberId != 0)
             {

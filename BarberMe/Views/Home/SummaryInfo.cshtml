@@ -20,13 +20,13 @@
                     <h2 class="text-white col-md-12 text-center text-primary">Заказ!</h2>
                     <hr />
 
-                    @*<div class="row justify-content-center mb-4 text-center">
+                    <div class="row justify-content-center mb-4 text-center">
                         <div class="col-md-12">
                             <h2>Барбер</h2>
                             <hr />
                         </div>
                         <div class="col-md-12">
-                            <img src="~/images/Barbers/@Model.Order.Barber.PhotoLink">
+                            <img src="~/images/Barbers/@Model.Order.Barber.PhotoLink" class="rounded-circle" style="max-width: 400px; max-height: 400px;">
                         </div>
                         <div class="col-md-12">
                             <p>@Model.Order.Barber.FirstName @Model.Order.Barber.LastName</p>
@@ -75,7 +75,10 @@
                             <hr />
                         </div>
 
-                    </div>*@
+                        <div class="col-md-12">
+                            <a asp-action="CustomerIndex">Окей!</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

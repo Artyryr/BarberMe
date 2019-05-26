@@ -140,7 +140,8 @@ namespace BarberMe.Migrations.ApplicationDb
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CVV");
+                    b.Property<string>("CVV")
+                        .IsRequired();
 
                     b.Property<string>("CardNumber")
                         .IsRequired();

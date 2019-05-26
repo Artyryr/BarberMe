@@ -38,7 +38,7 @@ namespace BarberMe.Migrations.ApplicationDb
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CardNumber = table.Column<string>(nullable: false),
                     ExpiryDate = table.Column<DateTime>(nullable: false),
-                    CVV = table.Column<int>(nullable: false),
+                    CVV = table.Column<string>(nullable: false),
                     CardOwner = table.Column<string>(nullable: false)
                 },
                 constraints: table =>

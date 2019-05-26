@@ -1,0 +1,74 @@
+﻿@model OrdersPageModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+    ViewBag.Image = "url('/images/Barbers.jpg')";
+    ViewBag.Title = "График работы";
+    ViewBag.PageName = "График работы";
+    ViewBag.Color = "bg-light";
+    ViewBag.Container = "container-fluid";
+}
+
+<section class="ftco-section bg-light">
+    <div class="container-fluid text-center">
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-10 text-center heading-section ftco-animate">
+                <h2 class="text-dark">Заказы на @DateTime.Today.Date.Day.@DateTime.Today.Month.@DateTime.Today.Year</h2>
+            </div>
+            @{
+                foreach (var barber in Model.Barbers)
+                {
+                    <div class="col-md-4">
+                        <hr />
+                        <div class="row justify-content-center mb-4">
+                            <div class="col-md-6">
+                                <img src="~/images/Barbers/@barber.PhotoLink" class="rounded-circle" style="max-width: 200px; max-height: 200px;" />
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-dark" style="font-size:45px; vertical-align: middle;">@barber.LastName @barber.FirstName</div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            @{
+                                List<Order> barberOrders = new List<Order>();
+                                barberOrders = Model.Orders[barber.BarberId];
+
+                                <div class="col">
+                                    @{
+                                        <hr />
+                                        if (barberOrders.Count == 0)
+                                        {
+                                            <hr />
+                                            <h6>Заказы отсутствует</h6>
+                                            <hr />
+                                        }
+                                        else
+                                        {
+                                            foreach (var order in barberOrders)
+                                            {
+                                                <hr />
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        @order.Schedule.Date.Hour : @order.Schedule.Date.Minute
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        @order.LastName @order.FirstName
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        @order.Service.ServiceName
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                            }
+                                        }
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
