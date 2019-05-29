@@ -455,14 +455,30 @@ namespace BarberMe.Controllers
 
         [Authorize]
         [HttpGet]
+        //Add dateTime to scroll through the week 
         public ActionResult OrdersPage(int id)
         {
             Barbershop barbershop = repository.Barbershops.Where(b => b.BarbershopId == id).FirstOrDefault();
             List<Barber> barbers = repository.Barbers.Where(b => b.BarbershopId == id).ToList();
-            List<Order> allOrders = repository.Orders.Where(b => b.Barbershop.BarbershopId == id).
-                Where(o => o.Schedule.Date.Day == DateTime.Today.Day && o.Schedule.Date.Month == DateTime.Today.Month && o.Schedule.Date.Year == DateTime.Today.Date.Year)
-                .OrderBy(o => o.Schedule.Date)
-                .ToList();
+
+            List<Order> allOrders = (from order in repository.Orders
+                                     where order.Barbershop.BarbershopId == id && order.Schedule.Date.Day == DateTime.Today.Day
+                                     && order.Schedule.Date.Month == DateTime.Today.Month && order.Schedule.Date.Year == DateTime.Today.Date.Year
+                                     orderby order.Schedule.Date
+                                     select new Order
+                                     {
+                                         Barber = order.Barber,
+                                         Barbershop = order.Barbershop,
+                                         Email = order.Email,
+                                         FirstName = order.FirstName,
+                                         LastName = order.LastName,
+                                         OrderId = order.OrderId,
+                                         Payment = order.Payment,
+                                         Price = order.Price,
+                                         Schedule = order.Schedule,
+                                         Service = order.Service,
+                                         Telephone = order.Telephone
+                                     }).ToList();
 
             Dictionary<int, List<Order>> orders = new Dictionary<int, List<Order>>() { };
 
@@ -598,6 +614,7 @@ namespace BarberMe.Controllers
             List<Schedule> schedules = (from schedule in repository.Schedules
                                         where schedule.BarberId == barber.BarberId
                                         && schedule.Availability == true
+                                        && schedule.Date >= DateTime.Today
                                         orderby schedule.Date
                                         select schedule).ToList();
 
@@ -745,6 +762,27 @@ namespace BarberMe.Controllers
                 return View("SummaryInfo", model);
             }
             return View("EnterCustomerInfo", model);
+        }
+
+        [HttpPost]
+        public ActionResult SearchResult(SearchModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if(model.SearchCriteria == "barbershop")
+                {
+                    List<Barbershop> barbershops = repository.Barbershops.Where(p => p.Name.ToLower().Contains(model.SearchText)).ToList();
+                    model.Barbershops = barbershops;
+                    return View(model);
+                }
+                else if(model.SearchCriteria == "barber")
+                {
+                    List<Barber> barbers = repository.Barbers.Where(p => (p.FirstName + " " + p.LastName).ToLower().Contains(model.SearchText)).ToList();
+                    model.Barbers = barbers;
+                    return View(model);
+                }
+            }
+            return View(model);
         }
     }
 }

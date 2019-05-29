@@ -1,0 +1,19 @@
+﻿@model SearchModel
+<form asp-action="SearchResult" asp-controller="Home" method="post" enctype="multipart/form-data" class="form-inline ml-auto">
+    <div class="col-md-12 text-center heading-section  ftco-animate">
+        <div class="row">
+            <div class="col-md-11">
+                <input asp-for="SearchText" type="text" class="searchTerm" placeholder="Введите поисковый запрос">
+                <button type="submit" class="searchButton">
+                    <i class="icon-search2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class=" col-md-12">
+        <div class="row justify-content-center">
+            <div class="col-md-3"><input type="radio" asp-for="SearchCriteria" checked="" value="barbershop" id="SearchCriteria" name="SearchCriteria">Барбершоп</div>
+            <div class="col-md-3"><input type="radio" asp-for="SearchCriteria" value="barber" id="SearchCriteria" name="SearchCriteria">Барбер</div>
+        </div>
+    </div>
+</form>

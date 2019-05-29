@@ -16,57 +16,64 @@
                 <h2 class="text-dark">Заказы на @DateTime.Today.Date.Day.@DateTime.Today.Month.@DateTime.Today.Year</h2>
             </div>
             @{
-                foreach (var barber in Model.Barbers)
+                if (Model.Barbers.Count != 0)
                 {
-                    <div class="col-md-4">
-                        <hr />
-                        <div class="row justify-content-center mb-4">
-                            <div class="col-md-6">
-                                <img src="~/images/Barbers/@barber.PhotoLink" class="rounded-circle" style="max-width: 200px; max-height: 200px;" />
+                    foreach (var barber in Model.Barbers)
+                    {
+                        <div class="col-md-4">
+                            <hr />
+                            <div class="row justify-content-center mb-4">
+                                <div class="col-md-6">
+                                    <img src="~/images/Barbers/@barber.PhotoLink" class="rounded-circle" style="max-width: 200px; max-height: 200px;" />
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-dark" style="font-size:45px; vertical-align: middle;">@barber.LastName @barber.FirstName</div>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="text-dark" style="font-size:45px; vertical-align: middle;">@barber.LastName @barber.FirstName</div>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="row">
-                            @{
-                                List<Order> barberOrders = new List<Order>();
-                                barberOrders = Model.Orders[barber.BarberId];
+                            <hr />
+                            <div class="row">
+                                @{
+                                    List<Order> barberOrders = new List<Order>();
+                                    barberOrders = Model.Orders[barber.BarberId];
 
-                                <div class="col">
-                                    @{
-                                        <hr />
-                                        if (barberOrders.Count == 0)
-                                        {
-                                            <hr />
-                                            <h6>Заказы отсутствует</h6>
-                                            <hr />
-                                        }
-                                        else
-                                        {
-                                            foreach (var order in barberOrders)
+                                    <div class="col">
+                                        @{
+                                            if (barberOrders.Count == 0)
                                             {
                                                 <hr />
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        @order.Schedule.Date.Hour : @order.Schedule.Date.Minute
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        @order.LastName @order.FirstName
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        @order.Service.ServiceName
-                                                    </div>
-                                                </div>
+                                                <h6>Заказы отсутствует</h6>
                                                 <hr />
                                             }
+                                            else
+                                            {
+                                                foreach (var order in barberOrders)
+                                                {
+                                                    <hr />
+                                                    <div class="row justify-content-center ">
+                                                        <div class="col-md-4">
+                                                            @{
+                                                                var minutes = (order.Schedule.Date.Minute.ToString() == "0" ? "00" : order.Schedule.Date.Minute.ToString());
+                                                            }
+                                                            @order.Schedule.Date.Hour : @minutes
+                                                        </div>
+                                                        <div class="row justify-content-center ">
+                                                            <div class="col-md-12">
+                                                                @order.LastName @order.FirstName
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                @order.Service.ServiceName
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr />
+                                                }
+                                            }
                                         }
-                                    }
-                                </div>
-                            }
+                                    </div>
+                                }
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
             }
         </div>

@@ -106,16 +106,16 @@ namespace BarberMe.Models.Database
                     .FirstOrDefault(p => p.OrderId == order.OrderId);
                 if (dbEntry != null)
                 {
-
                     dbEntry.Price = order.Price;
                     dbEntry.FirstName = order.FirstName;
                     dbEntry.LastName = order.LastName;
                     dbEntry.Telephone = order.Telephone;
                     dbEntry.Email = order.Email;
-
-                    //dbEntry.Service = order.Service;
-                    //dbEntry.Schedule = order.Schedule;
-                    //dbEntry.Payment = order.Payment;
+                    dbEntry.Barber = order.Barber;
+                    dbEntry.Barbershop = order.Barbershop;
+                    dbEntry.Service = order.Service;
+                    dbEntry.Schedule = order.Schedule;
+                    dbEntry.Payment = order.Payment;
                 }
             }
             context.SaveChanges();
