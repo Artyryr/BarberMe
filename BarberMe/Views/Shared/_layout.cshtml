@@ -35,21 +35,21 @@
                 <a class="navbar-brand" asp-action="BarbershopIndex" asp-controller="Home">BarberMe</a>
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a asp-action="Index" asp-controller="Home" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a asp-action="Index" asp-controller="Home" class="nav-link">Главная</a></li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                   aria-expanded="false">Profile</a>
+                                   aria-expanded="false">Профиль</a>
                                 <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                                     <a asp-action="BarbershopIndex" asp-controller="Home" class="dropdown-item">Управление</a>
-                                    <a asp-action="Logout" asp-controller="Home" class="dropdown-item">Logout</a>
+                                    <a asp-action="Logout" asp-controller="Home" class="dropdown-item">Выход</a>
                                 </div>
                             </li>
                         }
                         else
                         {
-                            <li class="nav-item"><a asp-action="LoginPage" asp-controller="Home" class="nav-link">Login</a></li>
+                            <li class="nav-item"><a asp-action="LoginPage" asp-controller="Home" class="nav-link">Вход</a></li>
                         }
                     </ul>
                 </div>
